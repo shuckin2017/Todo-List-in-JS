@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+$bg-color: #F8F9FE;
+$color-primary: #6BD0A2;
+$color-black: #353535;
+
+
+
+body {
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: normal;
+  color: $color-black;
+  background-color: $bg-color;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.todo {
+  width: 690px;
+  height: 739px;
+  margin-top: 20px;
+  padding: 0 40px 0 40px;
+  background: #FFFFFF;
+  box-shadow: 10px 0px 70px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 17px;
+  &_title {
+    margin-top: 40px;
+    display: block;
+    text-align: center;
+    font-size: 64px;
+  }
+  &_create {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__list {
+    margin-top: 20px;
+
+  }
+  &_item {
+    color: $color-black;
+    font-size: 36px;
+    line-height: 54px;
+    list-style: none;
+    & input[type=checkbox] {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+
+.newTask {
+  width: 400px;
+  height: 50px;
+  padding: 20px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 44px;
+  outline: none;
+  
+}
+
+
+.btn {
+  width: 200px;
+  height: 50px;
+  color: #ffffff;
+  padding: 5px;
+  font-size: 24px;
+  text-align: center;
+  background: $color-primary;
+  border-radius: 3px;
+  outline: none;
+  border-color: $color-primary;
+}
