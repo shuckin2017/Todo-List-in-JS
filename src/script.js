@@ -1,5 +1,5 @@
-const addMessage = document.querySelector('.newTask'),
-      addButton = document.querySelector('.btn'),
+const addMessage = document.querySelector('#newTask'),
+      addButton = document.querySelector('#btn_task'),
       todos = document.querySelector('.todo_list');
 
 
@@ -16,14 +16,16 @@ function addTodo() {
 const getTodo = () => {
   const todo = document.createElement('li');
   todo.className = 'todo_item';
+  // todo.className = 'list-group-item';
   const input = document.createElement('input');
   // input.id = 'item_' todo id
   input.type = 'checkbox';
   input.value = 'Новая задача';
   const label = document.createElement('label');
+  label.className = 'todo_mess';
   label.innerHTML = addMessage.value;
   const btnDelete = document.createElement('span');
-  btnDelete.innerHTML = '&#10008';
+  btnDelete.className = 'todo_del';
   btnDelete.addEventListener('click', () => {
     todos.removeChild(todo);
   });

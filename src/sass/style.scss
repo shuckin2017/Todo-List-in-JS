@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
+
 *,
 ::after,
 ::before {
@@ -26,10 +27,10 @@ body {
 
 .todo {
   width: 690px;
-  height: 739px;
+  min-height: 739px;
   margin-top: 20px;
   padding: 0 40px 0 40px;
-  background: #FFFFFF;
+  background: #FAFBFE;
   box-shadow: 10px 0px 70px 2px rgba(0, 0, 0, 0.2);
   border-radius: 17px;
   &_title {
@@ -44,18 +45,38 @@ body {
     justify-content: space-between;
     align-items: center;
   }
-  &__list {
+  &_list {
     margin-top: 20px;
-
+    padding-left: 0px;
   }
   &_item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 5px 0;
+    padding: 5px 15px;
+    font-size: 24px;
     color: $color-black;
-    font-size: 36px;
-    line-height: 54px;
     list-style: none;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
     & input[type=checkbox] {
-      width: 20px;
-      height: 20px;
+      margin-right: 10px;
+      width: 18px;
+      height: 18px;
+    }
+    & label {
+      width: 90%;
+    }
+  }
+  &_del::after {
+    content: "\00D7";
+    cursor: pointer;
+    color: red;
+    & :hover {
+      color: grey;
     }
   }
 }
@@ -73,7 +94,7 @@ body {
 }
 
 
-.btn {
+.btn_task {
   width: 200px;
   height: 50px;
   color: #ffffff;
