@@ -8,6 +8,14 @@ addButton.addEventListener('click', () => {
   addMessage.value = '';
 });
 
+addEventListener("keydown", (e) => {
+  if (e.keyCode == 13) {
+    addTodo();
+    addMessage.value = '';
+  }
+});
+
+
 function addTodo() {
   const todo = getTodo();
   todos.appendChild(todo);
@@ -34,3 +42,5 @@ const getTodo = () => {
   todo.appendChild(btnDelete);
   return todo;
 };
+
+
