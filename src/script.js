@@ -1,17 +1,27 @@
 const addMessage = document.querySelector('#newTask'),
       addButton = document.querySelector('#btn_task'),
-      todos = document.querySelector('.todo_list');
+      todos = document.querySelector('.todo_list'),
+      popup = document.querySelector('.popup'),
+      closePopup = document.querySelector('.close');
 
 
 addButton.addEventListener('click', () => {
-  addTodo();
-  addMessage.value = '';
+  if( addMessage.value == "" ){
+    popup.classList.remove("d-none");
+  } else {
+    addTodo();
+    addMessage.value = '';
+  }
 });
 
 addEventListener("keydown", (e) => {
   if (e.keyCode == 13) {
-    addTodo();
-    addMessage.value = '';
+    if( addMessage.value == "" ){
+      popup.classList.remove("d-none");
+    } else {
+      addTodo();
+      addMessage.value = '';
+    }
   }
 });
 
@@ -32,8 +42,10 @@ const getTodo = () => {
   const label = document.createElement('label');
   label.className = 'todo_mess';
   label.innerHTML = addMessage.value;
-  const btnDelete = document.createElement('span');
-  btnDelete.className = 'todo_del';
+  const btnDelete = document.createElement('button');
+  btnDelete.className = 'close';
+  btnDelete.type = 'button';
+  btnDelete.innerHTML = '&times';
   btnDelete.addEventListener('click', () => {
     todos.removeChild(todo);
   });
@@ -42,5 +54,12 @@ const getTodo = () => {
   todo.appendChild(btnDelete);
   return todo;
 };
+
+
+closePopup.addEventListener("click", (e) => {
+  e.preventDefault();
+  popup.classList.add("d-none");
+  
+});
 
 
