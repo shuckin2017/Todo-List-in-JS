@@ -3,34 +3,29 @@ const addMessage = document.querySelector('#newTask'),
       todos = document.querySelector('.todo_list'),
       todoItem = document.querySelector('.todo_item'),
       deleteButton = document.querySelector('#deleteButton'),
-      listEmpty = document.querySelector('#listEmpty')
+      listEmpty = document.querySelector('.listEmpty'),
       popup = document.querySelector('.popup'),
       closePopup = document.querySelector('.close');
 
 let todosData = [];
 
-checkTodo();
+addButton.addEventListener('click', () => addTodo());
 
-addButton.addEventListener('click', () => {
-  noneTodo();
-  
-});
-
-addMessage.addEventListener("keydown", (e) => {
+addMessage.addEventListener('keydown', (e) => {
   if (e.keyCode == 13) {
-    noneTodo();
-  }
-});
-
-function noneTodo() {
-  if( addMessage.value == "" ) {
-    popup.classList.remove("d-none");
-  } else {
     addTodo();
   }
+});
+
+const addTodo = () => {
+  if( addMessage.value == "" ) {
+    popup.classList.remove("d-none");
+    return;
+  }
+  createTodo();
 };
 
-function addTodo() {
+function createTodo() {
   const todo = getTodo();
   todos.appendChild(todo);
   todosData.push(addMessage.value);
@@ -40,81 +35,76 @@ function addTodo() {
 };
 
 const getTodo = (item) => {
-  const todo = document.createElement('li');
+  const todo = document.createElement('li'),
+        input = document.createElement('input'),
+        label = document.createElement('label'),
+        btnDelete = document.createElement('button');
+
   todo.className = 'todo_item';
-  const input = document.createElement('input');
   input.type = 'checkbox';
   input.value = 'Новая задача';
-  const label = document.createElement('label');
   label.className = 'todo_mess';
-  // label.innerHTML = item;
   label.innerHTML = addMessage.value;
-  const btnDelete = document.createElement('button');
   btnDelete.className = 'close';
   btnDelete.type = 'button';
   btnDelete.innerHTML = '&times';
+
   btnDelete.addEventListener('click', () => {
     todos.removeChild(todo);
-    // localStorage.removeItem('todos', addMessage.innerHTML);
   });
+
+  if (item) {
+    label.innerHTML = item;
+  }
+
   todo.appendChild(input);
   todo.appendChild(label);
   todo.appendChild(btnDelete);
   return todo;
 };
 
-const getList = function(todosData){
-      todosData.forEach(function(item){
-        console.log(item);
-        getTodo(item);
+const getList = (todosData) =>{
+      todosData.forEach(value => {
+        const todo = getTodo(value);
+        todos.appendChild(todo);
       });
 };
 
-// Загрузка в LocalStorage
+// Set todo list in LocalStorage
 const setLocalStorage = () => localStorage.setItem('todosData', JSON.stringify(todosData));
 
-// Получаем из LocalStorage
+// Get todo list in LocalStorage
 const getLocalStorage = function(){
   const todosStorage = localStorage.getItem('todosData');
-  if (todosStorage === null){
+  if (todosStorage == null){
       todosData = [];
-  } else {
-      todosData = JSON.parse(todosStorage);
-      console.log(todosData);
-      getList(todosData);
-  }
+      return;
+  } 
+  todosData = JSON.parse(todosStorage);
+  getList(todosData);
+  checkTodo();
 };
 
 getLocalStorage();
 
 closePopup.addEventListener("click", (e) => {
   e.preventDefault();
+  //look toggle method 
   popup.classList.add("d-none");
 });
 
-//Удаление из localStorage
+//delete in localStorage
 deleteButton.addEventListener('click', () => {
   localStorage.clear();
   todos.innerHTML = '';
+  checkTodo();
 });
 
-// function checkTodo() {
-//   if(!todos.classList.contains('todo_item') ) {
-//     listEmpty.className = 'alert alert-warning';
-//     const title = document.createElement('span');
-//     title.className = 'alert-heading';
-//     title.innerHTML = 'Список пуст';
-//     listEmpty.appendChild(title);
-//   } else {
-//     console.log("не пуст");
-//   }
-// };
-
-//Проверка списка
+//check todo list in task
 function checkTodo() {
-  if(todos.classList.contains('todo_item') ) {
-    listEmpty.setAttribute('hidden');
-  } else {
-    listEmpty.removeAttribute('hidden');
-  }
+  if(todos.childElementCount) {
+    listEmpty.setAttribute('hidden', '');
+    return;
+  } 
+  listEmpty.removeAttribute('hidden');
 };
