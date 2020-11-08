@@ -17,9 +17,15 @@
         <button class="btn btn-primary btn-lg ml-2"  id="btn_task"">Добавить</button>
       </div>
       
-      <div class="wrapper">
-        <ul class="todo_list list-group">
-        </ul>   
+      <div class="wrapper"> 
+        <!-- <div id="listEmpty" role="alert"></div> -->
+        <div class="alert alert-warning" role="alert" id="listEmpty">Список пуск</div>
+        <ul class="todo_list list-group"></ul> 
+        <hr>
+        <div class="clear-all">
+          <button class="btn btn-outline-danger btn-sm mr-2" id="deleteButton">Удалить список</button>
+          <button class="btn btn-outline-success btn-sm" id="doneButton">Все выполнено</button>
+        </div>  
       </div>
     </div>
   </div>

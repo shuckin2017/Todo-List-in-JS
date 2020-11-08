@@ -2,42 +2,18 @@ const addMessage = document.querySelector('#newTask'),
       addButton = document.querySelector('#btn_task'),
       todos = document.querySelector('.todo_list'),
       todoItem = document.querySelector('.todo_item'),
+      deleteButton = document.querySelector('#deleteButton'),
+      listEmpty = document.querySelector('#listEmpty')
       popup = document.querySelector('.popup'),
       closePopup = document.querySelector('.close');
 
-const todosData = [];
+let todosData = [];
 
-// const url = 'https://jsonplaceholder.typicode.com/todos';
-// const myRequest = new XMLHttpRequest();  
-
-// function sendTest(){
-//   return new Promise((resolve, regect) => {
-//     myRequest.open('GET', url);
-//     myRequest.send();
-//     myRequest.onload = ()=> {
-//       const status = myRequest.status;
-//       if(status < 400) {
-//         resolve(myRequest.response);
-//       } else {
-//         console.log('Ошибка запроса');
-//       }
-//     };
-//   });
-// };
-
-// const testPromise = sendTest();
-
-// testPromise.then((data) => {
-//   JSON.parse(data).forEach((key) => {
-//     dataTodos = key.title;
-    
-//   });   
-// });
 checkTodo();
-loadTodos();
 
 addButton.addEventListener('click', () => {
   noneTodo();
+  
 });
 
 addMessage.addEventListener("keydown", (e) => {
@@ -58,34 +34,20 @@ function addTodo() {
   const todo = getTodo();
   todos.appendChild(todo);
   todosData.push(addMessage.value);
-  addTodoJson();
+  setLocalStorage();
   addMessage.value = '';
+  checkTodo();
 };
 
-function addTodoJson() {
-  if(todosData != null ) {
-    localStorage.setItem('todosData', JSON.stringify(todosData));
-  }
-};
-
-function loadTodos() {
-  if(localStorage.getItem('todosData')){
-    data = JSON.parse(localStorage.getItem('todosData'));
-    data.forEach((item) => {
-      console.log(item);
-    });
-  }
-};
-
-const getTodo = () => {
+const getTodo = (item) => {
   const todo = document.createElement('li');
   todo.className = 'todo_item';
   const input = document.createElement('input');
-  // input.id = 'item_' todo id
   input.type = 'checkbox';
   input.value = 'Новая задача';
   const label = document.createElement('label');
   label.className = 'todo_mess';
+  // label.innerHTML = item;
   label.innerHTML = addMessage.value;
   const btnDelete = document.createElement('button');
   btnDelete.className = 'close';
@@ -101,16 +63,60 @@ const getTodo = () => {
   return todo;
 };
 
+const getList = function(todosData){
+      todosData.forEach(function(item){
+        console.log(item);
+        getTodo(item);
+      });
+};
+
+// Загрузка в LocalStorage
+const setLocalStorage = function(){
+  localStorage.setItem('todosData', JSON.stringify(todosData));
+};
+
+// Получаем из LocalStorage
+const getLocalStorage = function(){
+  const todosStorage = localStorage.getItem('todosData');
+  if (todosStorage === null){
+      todosData = [];
+  } else {
+      todosData = JSON.parse(todosStorage);
+      console.log(todosData);
+      getList(todosData);
+  }
+};
+
+getLocalStorage();
+
 closePopup.addEventListener("click", (e) => {
   e.preventDefault();
   popup.classList.add("d-none");
 });
 
+//Удаление из localStorage
+deleteButton.addEventListener('click', () => {
+  localStorage.clear();
+  todos.innerHTML = '';
+});
 
+// function checkTodo() {
+//   if(!todos.classList.contains('todo_item') ) {
+//     listEmpty.className = 'alert alert-warning';
+//     const title = document.createElement('span');
+//     title.className = 'alert-heading';
+//     title.innerHTML = 'Список пуст';
+//     listEmpty.appendChild(title);
+//   } else {
+//     console.log("не пуст");
+//   }
+// };
+
+//Проверка списка
 function checkTodo() {
-  if(!todos.innerHTML == null) {
-    console.log("список пуст");
+  if(todos.classList.contains('todo_item') ) {
+    listEmpty.setAttribute('hidden');
   } else {
-    console.log("список");
+    listEmpty.removeAttribute('hidden');
   }
 };
