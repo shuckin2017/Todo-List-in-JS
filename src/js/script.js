@@ -71,9 +71,7 @@ const getList = function(todosData){
 };
 
 // Загрузка в LocalStorage
-const setLocalStorage = function(){
-  localStorage.setItem('todosData', JSON.stringify(todosData));
-};
+const setLocalStorage = () => localStorage.setItem('todosData', JSON.stringify(todosData));
 
 // Получаем из LocalStorage
 const getLocalStorage = function(){
