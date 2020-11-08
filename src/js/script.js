@@ -1,8 +1,12 @@
+const url = 'https://jsonplaceholder.typicode.com/todos';
+const myRequest = new XMLHttpRequest();
+
 const addMessage = document.querySelector('#newTask'),
       addButton = document.querySelector('#btn_task'),
       todos = document.querySelector('.todo_list'),
       todoItem = document.querySelector('.todo_item'),
       deleteButton = document.querySelector('#deleteButton'),
+      loadButton = document.querySelector('#loadButton'),
       listEmpty = document.querySelector('.listEmpty'),
       popup = document.querySelector('.popup'),
       closePopup = document.querySelector('.close');
@@ -10,6 +14,7 @@ const addMessage = document.querySelector('#newTask'),
 let todosData = [];
 
 addButton.addEventListener('click', () => addTodo());
+loadButton.addEventListener('click', () => loadTodo());
 
 addMessage.addEventListener('keydown', (e) => {
   if (e.keyCode == 13) {
@@ -48,15 +53,12 @@ const getTodo = (item) => {
   btnDelete.className = 'close';
   btnDelete.type = 'button';
   btnDelete.innerHTML = '&times';
-
   btnDelete.addEventListener('click', () => {
     todos.removeChild(todo);
   });
-
   if (item) {
     label.innerHTML = item;
   }
-
   todo.appendChild(input);
   todo.appendChild(label);
   todo.appendChild(btnDelete);
@@ -65,16 +67,21 @@ const getTodo = (item) => {
 
 const getList = (todosData) =>{
       todosData.forEach(value => {
-        const todo = getTodo(value);
-        todos.appendChild(todo);
+        createElement(value);
       });
 };
+
+const createElement = (item) => {
+  const todo = getTodo(item);
+        todos.appendChild(todo);
+  checkTodo();
+}
 
 // Set todo list in LocalStorage
 const setLocalStorage = () => localStorage.setItem('todosData', JSON.stringify(todosData));
 
 // Get todo list in LocalStorage
-const getLocalStorage = function(){
+const getLocalStorage = () => {
   const todosStorage = localStorage.getItem('todosData');
   if (todosStorage == null){
       todosData = [];
@@ -107,4 +114,30 @@ function checkTodo() {
     return;
   } 
   listEmpty.removeAttribute('hidden');
+};
+
+function sendTest(){
+  return new Promise((resolve, regect) => {
+    console.log('Старт');
+    myRequest.open('GET', url);
+    myRequest.send();
+    myRequest.onload = ()=> {
+      const status = myRequest.status;
+      if(status < 400) {
+        // resolve - callback внути then
+        resolve(myRequest.response);
+      } else {
+        console.log('Ошибка запроса');
+      }
+    };
+  });
+}
+
+const loadTodo = () => {
+  const loadTodo = sendTest();
+  loadTodo.then((data) => {
+    JSON.parse(data).forEach((value) => {
+      createElement(Object.values(value)[2]);
+    });
+  });
 };
