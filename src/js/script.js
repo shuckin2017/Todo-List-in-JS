@@ -102,9 +102,11 @@ closePopup.addEventListener("click", (e) => {
 
 //delete in localStorage
 deleteButton.addEventListener('click', () => {
-  localStorage.clear();
-  todos.innerHTML = '';
-  checkTodo();
+  setTimeout(() => {
+    localStorage.clear();
+    todos.innerHTML = '';
+    checkTodo();
+  }, 1000);
 });
 
 //check todo list in task
@@ -137,7 +139,9 @@ const loadTodo = () => {
   const loadTodo = sendTest();
   loadTodo.then((data) => {
     JSON.parse(data).forEach((value) => {
-      createElement(Object.values(value)[2]);
+      setTimeout(() => {
+        createElement(Object.values(value)[2]);
+      }, 2000);
     });
   });
 };
