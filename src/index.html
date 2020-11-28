@@ -17,10 +17,22 @@
           <input type="text" class="form-control form-control-lg" id="newTask" placeholder="Новая запись">
           <button class="btn btn-primary btn-lg ml-2"  id="btn_task"">Добавить</button>
         </div>
-        
+          
+        <div class="todo-info">
+          <div class="todo-info__sort">
+            <span></span>
+          </div>
+          <div class="todo-info__quantity">
+            <span class="todo-info__item todo-info__item--active ">0</span>
+            <span class="todo-info__item todo-info__item--copmleted ">0</span>
+            <span class="todo-info__item todo-info__item--all ">0</span>
+          </div>
+        </div>
+
         <div class="wrapper"> 
           <div class="alert alert-warning listEmpty" role="alert" hidden>Список пуст</div>
-          <ul class="todo_list list-group"></ul> 
+          <ul class="todo_list list-group">
+          </ul> 
           <hr>
           <div class="clear-all">
             <button class="btn btn-outline-danger btn-sm mr-2" id="deleteButton">Удалить список</button>
@@ -47,6 +59,7 @@
       <div class="spinner"></div>
     </div>
 
+    
   </div>
 
   <script src="js/main.js" type="module"></script>

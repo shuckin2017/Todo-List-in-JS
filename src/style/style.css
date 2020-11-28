@@ -96,13 +96,14 @@ body {
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: .25rem;
+  transition: 0.1s all ease;
 }
 
 .todo_item:active {
   border: 1px solid red;
 }
 
-.todo_item:focus {
+.todo_item:hover {
   border: 1px solid red;
 }
 
@@ -240,4 +241,57 @@ body {
 .completed {
   background-color: #cccccc;
   opacity: .4;
+}
+
+.todo_item.deletedItem {
+  animation: opacity 1s ease-in-out;
+}
+
+@keyframes opacity {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.panelTask {
+  position: absolute;
+  width: 40%;
+  height: 50px;
+  background-color: #cccccc;
+}
+
+.panelTask__title {
+  font-size: 14px;
+}
+
+.todo-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.todo-info__item {
+  display: inline-block;
+  border-radius: 100%;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  line-height: 1.8;
+}
+
+.todo-info__item--active {
+  background-color: #6BD0A2;
+}
+
+.todo-info__item--copmleted {
+  color: #F8F9FE;
+  background-color: #353535;
+}
+
+.todo-info__item--all {
+  color: #F8F9FE;
+  background-color: #007bff;
 }

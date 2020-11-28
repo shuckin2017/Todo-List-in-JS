@@ -12,7 +12,7 @@ $bg-color: #F8F9FE;
 $color-primary: #6BD0A2;
 $color-black: #353535;
 $font-family: 'Montserrat', sans-serif;
-
+$transition: .1s all ease;
 
 body {
   font-size: 16px;
@@ -83,10 +83,11 @@ body {
     background-color: #fff;
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: .25rem;
-    &:active {
+    transition: $transition;
+    &:active{
       border: 1px solid red;
     }
-    &:focus {
+    &:hover {
       border: 1px solid red;
     }
     @media screen and ( max-width: 768px ) {
@@ -112,7 +113,7 @@ body {
       cursor: pointer;
       color: grey;
     }
-    &:hover:after{
+    &:hover:after {
       color: red;
     }
   }
@@ -153,7 +154,6 @@ body {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, .7);
-  
 
 }
 .popup-content {
@@ -225,4 +225,88 @@ body {
 .completed {
   background-color: darken(#fff, 20%);
   opacity: .4;
+}
+
+.todo_item.deletedItem {
+  animation: opacity 1s ease-in-out;
+}
+
+@keyframes opacity {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.panelTask {
+  position: absolute;
+  width: 40%;
+  height: 50px;
+  background-color: darken(#fff, 20%);
+  // .panelTask__info
+
+  &__info {
+    
+  }
+
+  // .panelTask__title
+
+  &__title {
+    font-size: 14px;
+  }
+
+  // .panelTask__date
+
+  &__date {
+  }
+}
+
+.todo-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  
+
+  // .todo-info__sort
+
+  &__sort {
+  }
+
+  // .todo-info__quantity
+
+  &__quantity {
+    
+  }
+
+  // .todo-info__active
+  &__item {
+    display: inline-block;
+    border-radius: 100%;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    line-height: 1.8;
+  }
+
+  // .todo-info__item--active
+
+  &__item--active {
+    background-color: $color-primary;
+  }
+
+  // .todo-info__item--copmleted
+
+  &__item--copmleted {
+    color: $bg-color;
+    background-color: $color-black;
+  }
+
+  // .todo-info__item--all
+
+  &__item--all {
+    color: $bg-color;
+    background-color: #007bff;
+  }
 }
