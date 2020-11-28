@@ -10,7 +10,7 @@ label {
 
 $bg-color: #F8F9FE;
 $color-primary: #6BD0A2;
-$color-black: #353535;
+$color-black: #002147;
 $font-family: 'Montserrat', sans-serif;
 $transition: .1s all ease;
 
@@ -78,17 +78,17 @@ body {
     margin: 5px 0;
     padding: 5px 15px;
     font-size: 24px;
-    color: #353535;
+    color: $color-black;
     list-style: none;
     background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    border-radius: .25rem;
+    box-shadow: rgba(23, 43, 77, 0.2) 0px 1px 1px, rgba(23, 43, 77, 0.2) 0px 0px 1px;
+    border-radius: .25rem; 
     transition: $transition;
     &:active{
-      border: 1px solid red;
+      background-color: rgb(244, 245, 247);
     }
-    &:hover {
-      border: 1px solid red;
+    &:hover{
+      background-color: rgb(244, 245, 247);
     }
     @media screen and ( max-width: 768px ) {
       padding: 5px 10px;

@@ -13,7 +13,7 @@ body {
   font-size: 16px;
   font-family: "Montserrat", sans-serif;
   font-weight: normal;
-  color: #353535;
+  color: #002147;
   background-color: #F8F9FE;
 }
 
@@ -91,20 +91,20 @@ body {
   margin: 5px 0;
   padding: 5px 15px;
   font-size: 24px;
-  color: #353535;
+  color: #002147;
   list-style: none;
   background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.125);
+  box-shadow: rgba(23, 43, 77, 0.2) 0px 1px 1px, rgba(23, 43, 77, 0.2) 0px 0px 1px;
   border-radius: .25rem;
   transition: 0.1s all ease;
 }
 
 .todo_item:active {
-  border: 1px solid red;
+  background-color: #f4f5f7;
 }
 
 .todo_item:hover {
-  border: 1px solid red;
+  background-color: #f4f5f7;
 }
 
 @media screen and (max-width: 768px) {
@@ -208,7 +208,7 @@ body {
 .spinner__inner {
   height: 100%;
   width: 100%;
-  background-color: #353535;
+  background-color: #002147;
   position: absolute;
   top: 0;
   left: 0;
@@ -288,7 +288,7 @@ body {
 
 .todo-info__item--copmleted {
   color: #F8F9FE;
-  background-color: #353535;
+  background-color: #002147;
 }
 
 .todo-info__item--all {
