@@ -25,7 +25,7 @@ let todosData;
  }
 
 function Task(description, dateCreation) {
-  this.task = description;
+  this.title = description;
   this.datecreation = dateCreation;
   this.completed = false;
 }
@@ -33,20 +33,20 @@ function Task(description, dateCreation) {
 // Set todo list in LocalStorage
 const updateStorage = () => localStorage.setItem('todosData', JSON.stringify(todosData));
 
-const addTodo = () => {
-  if( addMessage.value == "" ) {
-    service.elemShow(popup, 0);
-    return;
+const fillList = () => {
+  todos.innerHTML = '';
+  if(todosData.length > 0) {
+    todosData.forEach((item, index) => {
+      createTodo(item);
+    });
   }
-  createTodo();
 };
 
-function createTodo() {
-  const todo = createTemplate();
-  todos.appendChild(todo);
+const createTodo = (item) => {
+  todos.appendChild(createTemplate(item));
   addMessage.value = '';
   checkTodo();
-}
+};
 
 const createTemplate = (item) => {
   const todo = document.createElement('li'),
@@ -57,51 +57,39 @@ const createTemplate = (item) => {
   todo.className = 'todo_item';
   input.type = 'checkbox';
   input.value = 'Новая задача';
+  item.completed ? input.setAttribute('checked', '') : '';
+  item.completed ? todo.className = 'todo_item completed' : '';
   label.className = 'todo_mess';
-  label.innerHTML = addMessage.value;
+  label.innerHTML = item.title;
   btnDelete.className = 'close del';
   btnDelete.type = 'button';
   btnDelete.innerHTML = '&times';
   btnDelete.addEventListener('click', () => {
     todos.removeChild(todo);
   });
-  if (item) {
-    label.innerHTML = item;
-  }
   todo.appendChild(input);
   todo.appendChild(label);
   todo.appendChild(btnDelete);
   return todo;
 };
 
-const getList = () =>{
-  todosData.forEach(value => {
-    createElement(value.description);
-  });
-};
-
-const createElement = (item) => {
-  const todo = createTemplate(item);
-        todos.appendChild(todo);
-        checkTodo();
+const getList = () => {
+  if(addMessage.value) {
+    todosData.push(new Task(addMessage.value, service.getDateCreation()));
+  }
+  updateStorage();
+  fillList();
 };
 
 getList();
 
-addButton.addEventListener('click', () => {
-  todosData.push(new Task(addMessage.value, service.getDateCreation()));
-  updateStorage();
-  addTodo();
-});
-
-loadButton.addEventListener('click', () => loadTodo());
+addButton.addEventListener('click', () => getList());
 addMessage.addEventListener('keydown', (e) => {
   if (e.keyCode == 13) {
-    todosData.push(new Task(addMessage.value, service.getDateCreation()));
-    updateStorage();
-    addTodo();
+    getList();
   }
 });
+loadButton.addEventListener('click', () => loadTodo());
 
 closePopup.addEventListener("click", (e) => {
   e.preventDefault();
@@ -113,21 +101,20 @@ deleteAllButton.addEventListener('click', () => {
   setTimeout(() => {
     localStorage.clear();
     todos.innerHTML = '';
-    service.checkTodo(todos.childElementCount);
+    checkTodo();
   }, 1000);
 });
 
-//check todo list in task
-
 
 const loadTodo = () => {
-  service.elemShow(spinner, 1000);
+  service.elemShow(spinner, 0);
   const loadTodo = service.sendTest();
   loadTodo.then((data) => {
-    JSON.parse(data).forEach((value) => {
+    JSON.parse(data).forEach((index) => {
+      // console.log(index.title);
       setTimeout(() => {
         service.elemHide(spinner, 0);
-        createElement(Object.values(value)[2]);
+        createTodo(index);
       }, 3000);
     });
   });
@@ -151,11 +138,4 @@ function checkTodo() {
     return;
   } 
   service.elemShow(listEmpty, 0);
-};
-
-const fillList = () => {
-  todos.innerHTML = '';
-  if(todosData.length > 0) {
-    
-  }
 };

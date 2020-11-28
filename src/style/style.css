@@ -5,12 +5,20 @@
   box-sizing: border-box;
 }
 
+label {
+  margin-bottom: 0;
+}
+
 body {
   font-size: 16px;
   font-family: "Montserrat", sans-serif;
   font-weight: normal;
   color: #353535;
   background-color: #F8F9FE;
+}
+
+.main {
+  position: relative;
 }
 
 .container {
@@ -20,6 +28,12 @@ body {
 
 .wrapper {
   margin-top: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    margin-top: 1 0px;
+  }
 }
 
 .todo {
@@ -32,11 +46,24 @@ body {
   border-radius: 17px;
 }
 
+@media screen and (max-width: 768px) {
+  .todo {
+    margin-top: 10px;
+    padding: 0 20px 0 20px;
+  }
+}
+
 .todo_title {
   margin-top: 40px;
   display: block;
   text-align: center;
   font-size: 64px;
+}
+
+@media screen and (max-width: 768px) {
+  .todo_title {
+    font-size: 34px;
+  }
 }
 
 .todo_create {
@@ -49,6 +76,11 @@ body {
 .todo__list {
   margin-top: 20px;
   padding-left: 0px;
+}
+
+.todo_mess {
+  display: flex;
+  flex-direction: column;
 }
 
 .todo_item {
@@ -66,6 +98,21 @@ body {
   border-radius: .25rem;
 }
 
+.todo_item:active {
+  border: 1px solid red;
+}
+
+.todo_item:focus {
+  border: 1px solid red;
+}
+
+@media screen and (max-width: 768px) {
+  .todo_item {
+    padding: 5px 10px;
+    font-size: 16px;
+  }
+}
+
 .todo_item label {
   width: 90%;
 }
@@ -78,7 +125,7 @@ body {
 
 .todo_del::after {
   content: "";
-  background-image: url(img/unchecked.svg);
+  background: url(img/unchecked.svg) center no-repeat;
   width: 30px;
   height: 30px;
   cursor: pointer;
@@ -151,4 +198,46 @@ body {
   display: flex;
   justify-content: center;
   margin-top: 10px;
+}
+
+.small-text {
+  font-size: 12px;
+}
+
+.spinner__inner {
+  height: 100%;
+  width: 100%;
+  background-color: #353535;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: .6;
+}
+
+.spinner {
+  z-index: 20;
+  position: absolute;
+  top: 45%;
+  left: 48%;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 6px solid #eee;
+  border-left-color: #007bff;
+  animation: spin 1.4s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.completed {
+  background-color: #cccccc;
+  opacity: .4;
 }
