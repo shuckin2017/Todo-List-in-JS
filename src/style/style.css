@@ -1,12 +1,95 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap");
-*,
-::after,
-::before {
+* {
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+}
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-label {
-  margin-bottom: 0;
+:focus, :active {
+  outline: none;
+}
+
+a:focus, a:active {
+  outline: none;
+}
+
+aside, nav, footer, header, section {
+  display: block;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+  color: #000;
+}
+
+body {
+  font-size: 100%;
+  line-height: 1,5;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a, a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+svg {
+  fill: currentColor;
+}
+
+ol li {
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
 }
 
 body {
@@ -24,10 +107,6 @@ body {
 .container {
   display: flex;
   justify-content: center;
-}
-
-.wrapper {
-  margin-top: 20px;
 }
 
 @media screen and (max-width: 768px) {
@@ -73,9 +152,10 @@ body {
   align-items: center;
 }
 
-.todo__list {
+.todo_list {
   margin-top: 20px;
-  padding-left: 0px;
+  overflow: scroll;
+  height: 400px;
 }
 
 .todo_mess {
@@ -271,6 +351,51 @@ body {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+}
+
+.todo-info__sort {
+  padding: 0 5px;
+}
+
+.todo-info .sort-block__item {
+  border-color: #002147;
+  z-index: 1;
+  background-color: #fff;
+  box-shadow: rgba(23, 43, 77, 0.2) 0px 1px 1px, rgba(23, 43, 77, 0.2) 0px 0px 1px;
+  border-radius: .25rem;
+  padding: .1rem .8rem;
+  transition: 0.1s all ease;
+}
+
+.todo-info .sort-block__item-active {
+  background-color: #cccccc;
+}
+
+.todo-info .sort-block__item:hover {
+  background-color: #f2f2f2;
+}
+
+.todo-info .sort-block__input {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+
+.todo-info .svg-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: #002147;
+  transition: 0.1s all ease;
+}
+
+.todo-info .svg-icon svg:hover {
+  fill: #0068e0;
+}
+
+.todo-info .svg-icon svg:active {
+  fill: #479dff;
 }
 
 .todo-info__item {

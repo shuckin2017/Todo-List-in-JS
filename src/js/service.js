@@ -25,7 +25,7 @@ export default {
     return dataCreation;
   },
 
-  sendTest(){
+  sendTest() {
     return new Promise((resolve, regect) => {
       console.log('Loading...');
       myRequest.open('GET', url);

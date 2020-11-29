@@ -29,6 +29,7 @@ let todosData,
  }
 
 function Task(description, dateCreation) {
+  this.id = todosData.length+1;
   this.title = description;
   this.datecreation = dateCreation;
   this.completed = false;
@@ -38,7 +39,7 @@ function Task(description, dateCreation) {
 const updateStorage = () => localStorage.setItem('todosData', JSON.stringify(todosData));
 
 const filterTasks = () => {
-  const activeTask = todosData.length && todosData.filter(item => item.completed == false);
+  const activeTask = todosData.length && todosData.filter(item => item.completed == false) ;
   const completedTask = todosData.length && todosData.filter(item => item.completed == true);
   lengthActive.innerHTML = activeTask.length;
   lengthСompleted.innerHTML = completedTask.length;
@@ -58,7 +59,6 @@ const fillList = () => {
   }
 };
 
-
 const createTodo = (item, index) => {
   todos.appendChild(createTemplate(item, index));
   addMessage.value = '';
@@ -76,7 +76,6 @@ const createTemplate = (item, index) => {
     completedTask(index);
     if(input.checked) {
       todo.className = 'todo_item completed';
-
     }
   });
   input.type = 'checkbox';
@@ -97,14 +96,7 @@ const createTemplate = (item, index) => {
   todo.appendChild(input);
   todo.appendChild(label);
   todo.appendChild(btnDelete);
-  // todo.addEventListener('click', () => {
-  //   if(todo.childNodes.length == 3) {
-  //     todo.appendChild(showInfoTask(item)); 
-  //   } else {
-  //     todo.lastChild.remove();
-  //   }
 
-  // });
   return todo;
 };
 
@@ -121,6 +113,7 @@ const completedTask = (index) => {
   todosData[index].completed = !todosData[index].completed;
   todosData[index].completed ? todoItemElem[index].classList.add('completed') : todoItemElem[index].classList.remove('completed');
   updateStorage();
+  fillList();
 };
 
 const removeTask = (index) => {
@@ -159,7 +152,6 @@ const loadTodo = () => {
   const loadTodo = service.sendTest();
   loadTodo.then((data) => {
     JSON.parse(data).forEach((index) => {
-      // console.log(index.title);
       setTimeout(() => {
         service.elemHide(spinner, 0);
         createTodo(index);
@@ -194,3 +186,19 @@ function showInfoTask(item) {
 
   return panelTask;
 }
+
+// const filterList = () => {
+//   const svg1 = document.querySelector('.svg-1'),
+//         svg2 = document.querySelector('.svg-2');
+
+//     svg1.addEventListener('click', () => {
+//       service.elemHide(svg1, 100);
+//       service.elemShow(svg2, 100);
+//     });
+//     svg2.addEventListener('click', () => {
+//       service.elemHide(svg2, 100);
+//       service.elemShow(svg1, 100);
+//     });
+// };
+
+// filterList();
