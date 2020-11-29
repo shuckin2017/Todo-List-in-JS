@@ -1,0 +1,422 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap");
+* {
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+}
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:focus, :active {
+  outline: none;
+}
+
+a:focus, a:active {
+  outline: none;
+}
+
+aside, nav, footer, header, section {
+  display: block;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+  color: #000;
+}
+
+body {
+  font-size: 100%;
+  line-height: 1,5;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a, a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+svg {
+  fill: currentColor;
+}
+
+ol li {
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+}
+
+body {
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: normal;
+  color: #002147;
+  background-color: #F8F9FE;
+}
+
+.main {
+  position: relative;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    margin-top: 1 0px;
+  }
+}
+
+.todo {
+  width: 690px;
+  min-height: 739px;
+  margin-top: 20px;
+  padding: 0 40px 0 40px;
+  background: #FAFBFE;
+  box-shadow: 10px 0px 70px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 17px;
+}
+
+@media screen and (max-width: 768px) {
+  .todo {
+    margin-top: 10px;
+    padding: 0 20px 0 20px;
+  }
+}
+
+.todo_title {
+  margin-top: 40px;
+  display: block;
+  text-align: center;
+  font-size: 64px;
+}
+
+@media screen and (max-width: 768px) {
+  .todo_title {
+    font-size: 34px;
+  }
+}
+
+.todo_create {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todo_list {
+  margin-top: 20px;
+  overflow: scroll;
+  height: 400px;
+}
+
+.todo_mess {
+  display: flex;
+  flex-direction: column;
+}
+
+.todo_item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 5px 0;
+  padding: 5px 15px;
+  font-size: 24px;
+  color: #002147;
+  list-style: none;
+  background-color: #fff;
+  box-shadow: rgba(23, 43, 77, 0.2) 0px 1px 1px, rgba(23, 43, 77, 0.2) 0px 0px 1px;
+  border-radius: .25rem;
+  transition: 0.1s all ease;
+}
+
+.todo_item:active {
+  background-color: #f4f5f7;
+}
+
+.todo_item:hover {
+  background-color: #f4f5f7;
+}
+
+@media screen and (max-width: 768px) {
+  .todo_item {
+    padding: 5px 10px;
+    font-size: 16px;
+  }
+}
+
+.todo_item label {
+  width: 90%;
+}
+
+.todo_item input[type=checkbox] {
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+}
+
+.todo_del::after {
+  content: "";
+  background: url(img/unchecked.svg) center no-repeat;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  color: grey;
+}
+
+.todo_del:hover:after {
+  color: red;
+}
+
+.newTask {
+  width: 400px;
+  height: 50px;
+  padding: 20px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 44px;
+  outline: none;
+}
+
+.btn- {
+  width: 200px;
+  height: 50px;
+  color: #ffffff;
+  padding: 5px;
+  font-size: 24px;
+  text-align: center;
+  background: #6BD0A2;
+  border-radius: 3px;
+  outline: none;
+  border-color: #6BD0A2;
+}
+
+.popup {
+  position: fixed;
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.popup-content {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  box-shadow: 1px 0px 5px #7d7d7d;
+  min-height: 10px;
+  width: 430px;
+  padding: 10px 20px;
+  margin: 100px auto;
+  position: relative;
+}
+
+.popup-content_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.popup-content_title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 24px;
+  text-align: center;
+}
+
+.clear-all {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.small-text {
+  font-size: 12px;
+}
+
+.spinner__inner {
+  height: 100%;
+  width: 100%;
+  background-color: #002147;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: .6;
+}
+
+.spinner {
+  z-index: 20;
+  position: absolute;
+  top: 45%;
+  left: 48%;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 6px solid #eee;
+  border-left-color: #007bff;
+  animation: spin 1.4s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.completed {
+  background-color: #cccccc;
+  opacity: .4;
+}
+
+.todo_item.deletedItem {
+  animation: opacity 1s ease-in-out;
+}
+
+@keyframes opacity {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.panelTask {
+  position: absolute;
+  width: 40%;
+  height: 50px;
+  background-color: #cccccc;
+}
+
+.panelTask__title {
+  font-size: 14px;
+}
+
+.todo-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.todo-info__sort {
+  padding: 0 5px;
+}
+
+.todo-info .sort-block__item {
+  border-color: #002147;
+  z-index: 1;
+  background-color: #fff;
+  box-shadow: rgba(23, 43, 77, 0.2) 0px 1px 1px, rgba(23, 43, 77, 0.2) 0px 0px 1px;
+  border-radius: .25rem;
+  padding: .1rem .8rem;
+  transition: 0.1s all ease;
+}
+
+.todo-info .sort-block__item-active {
+  background-color: #cccccc;
+}
+
+.todo-info .sort-block__item:hover {
+  background-color: #f2f2f2;
+}
+
+.todo-info .sort-block__input {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+
+.todo-info .svg-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: #002147;
+  transition: 0.1s all ease;
+}
+
+.todo-info .svg-icon svg:hover {
+  fill: #0068e0;
+}
+
+.todo-info .svg-icon svg:active {
+  fill: #479dff;
+}
+
+.todo-info__item {
+  display: inline-block;
+  border-radius: 100%;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  line-height: 1.8;
+}
+
+.todo-info__item--active {
+  background-color: #6BD0A2;
+}
+
+.todo-info__item--copmleted {
+  color: #F8F9FE;
+  background-color: #002147;
+}
+
+.todo-info__item--all {
+  color: #F8F9FE;
+  background-color: #007bff;
+}
